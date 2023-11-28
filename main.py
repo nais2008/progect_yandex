@@ -25,7 +25,7 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
     def check_input1(f):
         def wrapper(self):
             for i in self.base_line_edit0:
-                if len(i.text) == 0:
+                if len(str(i.text)) == 0:
                     return
             f(self)
         return wrapper
@@ -33,7 +33,7 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
     def check_input2(funct):
         def wrapper(self):
             for i in self.base_line_edit1:
-                if len(i.text) == 0:
+                if len(str(i.text)) == 0:
                     return
             funct(self)
         return wrapper
@@ -47,18 +47,20 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
         fio = self.fio.text()
         email = self.email.text()
         pas = self.pas.text()
+        self.check_db.thr_reg(fio, email, pas)
 
-        self.loading = Loading(self)
-        self.loading.show()
+        # self.loading = Loading(self)
+        # self.loading.show()
         # self.close()
 
     @check_input2
     def auth(self):
         email = self.email_2.text()
         pas = self.pas_2.text()
+        self.check_db.thr_login(email, pas)
 
-        self.loading = Loading(self)
-        self.loading.show()
+        # self.loading = Loading(self)
+        # self.loading.show()
         # self.close()
 
 
