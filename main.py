@@ -4,8 +4,9 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
 from PyQt5.QtGui import QMovie
 from PyQt5.QtCore import QTimer
-import sqlite3
-import check_db
+from des import *
+from check_db import *
+
 
 
 class App(QMainWindow, QWidget):
