@@ -1,17 +1,14 @@
 import sys
 
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QLabel
-from PyQt5.QtGui import QMovie
-from PyQt5.QtCore import QTimer
+from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from des import *
 from check_db import *
 
 
 
-class App(QMainWindow, QWidget):
-    def __init__(self):
-        super().__init__()
+class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
         uic.loadUi('ui/vhod.ui', self)
         self.initUI()
 
@@ -21,9 +18,12 @@ class App(QMainWindow, QWidget):
 
         self.reg_2.clicked.connect(self.registration)
         self.vhod_2.clicked.connect(self.auth)
+
+        self.check_db = CheckThread()
         self.base_line_edit0 = [self.fio, self.email, self.pas]
         self.base_line_edit1 = [self.email_2, self.pas_2]
 
+    # Проверка правильности ввода
     def check_input1(funct):
         def wrapper(self):
             for i in self.base_line_edit0:
@@ -40,11 +40,19 @@ class App(QMainWindow, QWidget):
             funct(self)
         return wrapper
 
+    # Обработчик сигнала
+    def signal_handler(self, value):
+        QtWidgets.QMessageBox.about(self, 'Оповещение', value)
+
     @check_input1
     def registration(self):
+        fio = self.fio.text()
+        email = self.ui.email.text()
+        pas = self.ui.pas.text()
+
         self.loading = Loading(self)
         self.loading.show()
-        self.close()
+        # self.close()
 
     @check_input2
     def auth(self):
@@ -53,10 +61,10 @@ class App(QMainWindow, QWidget):
 
         self.loading = Loading(self)
         self.loading.show()
-        self.close()
+        # self.close()
 
 
-class Loading(QWidget):
+class Loading(QtWidgets.QWidget):
     def __init__(self, *args):
         super().__init__()
         uic.loadUi('ui/main.ui', self)
@@ -66,12 +74,12 @@ class Loading(QWidget):
         self.setFixedSize(800, 600)
         self.setWindowTitle('███░░⏳')
 
-        self.label_animation = QLabel(self)
+        self.label_animation = QtWidgets.QLabel(self)
 
-        self.movie = QMovie('logo/loader.gif')
+        self.movie = QtGui.QMovie('logo/loader.gif')
         self.label_animation.setMovie(self.movie)
 
-        timer = QTimer(self)
+        timer = QtCore.QTimer(self)
         self.startAnimation()
         timer.singleShot(10000, self.stopAnimation)
 
@@ -86,8 +94,11 @@ class Loading(QWidget):
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     ex = App()
-    widget = QWidget()
+    widget = QtWidgets.QWidget()
     ex.show()
-    sys.exit(app.exec())
+    try:
+        sys.exit(app.exec())
+    except SystemExit:
+        print('closing Window...')
