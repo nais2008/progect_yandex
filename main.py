@@ -47,8 +47,8 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
     @check_input1
     def registration(self):
         fio = self.fio.text()
-        email = self.ui.email.text()
-        pas = self.ui.pas.text()
+        email = self.email.text()
+        pas = self.pas.text()
 
         self.loading = Loading(self)
         self.loading.show()
@@ -56,8 +56,8 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
 
     @check_input2
     def auth(self):
-        email = self.ui.email_2.text()
-        pas = self.ui.pas_2.text()
+        email = self.email_2.text()
+        pas = self.pas_2.text()
 
         self.loading = Loading(self)
         self.loading.show()
