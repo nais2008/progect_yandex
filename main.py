@@ -1,7 +1,5 @@
 import sys
 
-from PyQt5 import uic, QtCore, QtGui, QtWidgets
-from des import *
 from check_db import *
 
 
@@ -24,12 +22,12 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
         self.base_line_edit1 = [self.email_2, self.pas_2]
 
     # Проверка правильности ввода
-    def check_input1(funct):
+    def check_input1(f):
         def wrapper(self):
             for i in self.base_line_edit0:
                 if len(i.text) == 0:
                     return
-            funct(self)
+            f(self)
         return wrapper
 
     def check_input2(funct):
@@ -95,6 +93,7 @@ class Loading(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
+    app.setWindowIcon(QtGui.QIcon('logo/logo.png'))
     ex = App()
     widget = QtWidgets.QWidget()
     ex.show()
