@@ -21,39 +21,20 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
         self.base_line_edit0 = [self.fio, self.email, self.pas]
         self.base_line_edit1 = [self.email_2, self.pas_2]
 
-    # Проверка правильности ввода
-    def check_input1(f):
-        def wrapper(self):
-            for i in self.base_line_edit0:
-                if len(str(i.text)) == 0:
-                    return
-            f(self)
-        return wrapper
-
-    def check_input2(funct):
-        def wrapper(self):
-            for i in self.base_line_edit1:
-                if len(str(i.text)) == 0:
-                    return
-            funct(self)
-        return wrapper
-
     # Обработчик сигнала
     def signal_handler(self, value):
         QtWidgets.QMessageBox.about(self, 'Оповещение', value)
 
-    @check_input1
     def registration(self):
         fio = self.fio.text()
         email = self.email.text()
         pas = self.pas.text()
         self.check_db.thr_reg(fio, email, pas)
 
-        # self.loading = Loading(self)
-        # self.loading.show()
+        self.loading = Loading(self)
+        self.loading.show()
         # self.close()
 
-    @check_input2
     def auth(self):
         email = self.email_2.text()
         pas = self.pas_2.text()
@@ -81,7 +62,7 @@ class Loading(QtWidgets.QWidget):
 
         timer = QtCore.QTimer(self)
         self.startAnimation()
-        timer.singleShot(10000, self.stopAnimation)
+        timer.singleShot(5000, self.stopAnimation)
 
         self.show()
 

@@ -2,7 +2,7 @@ import sqlite3
 
 
 def login(email, passw, signal):
-    con = sqlite3.connect('handler/db.sqlite')
+    con = sqlite3.connect('db/db.sqlite')
     cur = con.cursor()
 
     # Проверка на существование аккаунта
@@ -11,6 +11,7 @@ def login(email, passw, signal):
 
     if value != [] and value[0][3] == passw:
         signal.emit('Успешная авторизация')
+        print('aregaergareg')
     else:
         signal.emit('Неправильно введет логин или пароль')
 
@@ -19,7 +20,7 @@ def login(email, passw, signal):
 
 
 def registr(fio, email, passw, signal):
-    con = sqlite3.connect('handler/db.sqlite')
+    con = sqlite3.connect('db/db.sqlite')
     cur = con.cursor()
 
     cur.execute(f'SELECT * FROM user WHERE email="{email}";')
@@ -29,7 +30,6 @@ def registr(fio, email, passw, signal):
         signal.emit('Аккаунт с этим email уже используется')
     elif value == []:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
-        signal.emit('Ваш аккаунт был зарегистрирован')
         con.commit()
 
     cur.close()
