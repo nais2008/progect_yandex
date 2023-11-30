@@ -1,4 +1,5 @@
 import sqlite3
+from PyQt5 import uic, QtCore, QtGui, QtWidgets
 
 
 def login(email, passw, signal):
@@ -10,8 +11,8 @@ def login(email, passw, signal):
     value = cur.fetchall()
 
     if value != [] and value[0][3] == passw:
-        signal.emit('Успешная авторизация')
-        print('aregaergareg')
+        signal.emit('Ok')
+        print('Авторизован')
     else:
         signal.emit('Неправильно введет логин или пароль')
 
@@ -30,6 +31,7 @@ def registr(fio, email, passw, signal):
         signal.emit('Аккаунт с этим email уже используется')
     elif value == []:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
+        print("Зарегистрирован")
         con.commit()
 
     cur.close()

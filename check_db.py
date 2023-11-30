@@ -1,4 +1,3 @@
-from PyQt5 import uic, QtCore, QtGui, QtWidgets
 from db.db_handler import *
 
 

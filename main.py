@@ -1,7 +1,5 @@
 import sys
-
 from check_db import *
-
 
 
 class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
@@ -18,8 +16,6 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
         self.vhod_2.clicked.connect(self.auth)
 
         self.check_db = CheckThread()
-        self.base_line_edit0 = [self.fio, self.email, self.pas]
-        self.base_line_edit1 = [self.email_2, self.pas_2]
 
     # Обработчик сигнала
     def signal_handler(self, value):
@@ -31,17 +27,13 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
         pas = self.pas.text()
         self.check_db.thr_reg(fio, email, pas)
 
-        self.loading = Loading(self)
-        self.loading.show()
-        # self.close()
-
     def auth(self):
         email = self.email_2.text()
         pas = self.pas_2.text()
         self.check_db.thr_login(email, pas)
 
-        # self.loading = Loading(self)
-        # self.loading.show()
+        self.loading = Loading(self)
+        self.loading.show()
         # self.close()
 
 
@@ -83,4 +75,4 @@ if __name__ == '__main__':
     try:
         sys.exit(app.exec())
     except SystemExit:
-        print('closing Window...')
+        print('Closing Window...')
