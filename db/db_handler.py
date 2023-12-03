@@ -29,6 +29,8 @@ def registr(fio, email, passw, signal):
 
     if value != []:
         signal.emit('Аккаунт с этим email уже используется')
+        osh = Osh('Аккаунт с этим email уже используется')
+        osh.show()
     elif value == []:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
         print("Зарегистрирован")
@@ -36,3 +38,10 @@ def registr(fio, email, passw, signal):
 
     cur.close()
     con.close()
+
+
+class Osh(QtWidgets.QWidget):
+    def __init__(self, text_osh):
+        super().__init__()
+        uic.loadUi('ui/osh.ui', self)
+        self.initUI()

@@ -45,7 +45,6 @@ class Loading(QtWidgets.QWidget):
 
     def initUI(self):
         self.setFixedSize(800, 600)
-        self.setWindowTitle('███░░⏳')
 
         self.label_animation = QtWidgets.QLabel(self)
 
