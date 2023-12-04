@@ -45,3 +45,6 @@ class Osh(QtWidgets.QWidget):
         super().__init__()
         uic.loadUi('ui/osh.ui', self)
         self.initUI()
+        self.label.setText(text_osh)
+        self.vhod = App(self)
+        self.pushButton.clicked.connect(self.vhod.show())
