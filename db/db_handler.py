@@ -2,6 +2,14 @@ import sqlite3
 from PyQt5 import uic, QtCore, QtGui, QtWidgets
 
 
+class Osh(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('ui/osh.ui', self)
+        self.initUI()
+        self.label.setText(self)
+
+
 def login(email, passw, signal):
     con = sqlite3.connect('db/db.sqlite')
     cur = con.cursor()
@@ -29,7 +37,8 @@ def registr(fio, email, passw, signal):
 
     if value != []:
         signal.emit('Аккаунт с этим email уже используется')
-        osh = Osh('Аккаунт с этим email уже используется')
+        print('не зареган')
+        osh = Osh()
         osh.show()
     elif value == []:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
@@ -38,13 +47,3 @@ def registr(fio, email, passw, signal):
 
     cur.close()
     con.close()
-
-
-class Osh(QtWidgets.QWidget):
-    def __init__(self, text_osh):
-        super().__init__()
-        uic.loadUi('ui/osh.ui', self)
-        self.initUI()
-        self.label.setText(text_osh)
-        self.vhod = App(self)
-        self.pushButton.clicked.connect(self.vhod.show())

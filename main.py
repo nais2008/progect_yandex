@@ -1,5 +1,6 @@
 import sys
 from check_db import *
+import random
 
 
 class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
@@ -17,10 +18,19 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
 
         self.check_db = CheckThread()
 
+    def reg_check(funct):
+        def wraper(self):
+            if (self.fio.text() != '') and ('@' in self.email.text()) and (self.pas.text() != ''):
+                pass
+            else:
+                pass
+        return wraper
+
     # Обработчик сигнала
     def signal_handler(self, value):
         QtWidgets.QMessageBox.about(self, 'Оповещение', value)
 
+    @reg_check
     def registration(self):
         fio = self.fio.text()
         email = self.email.text()
@@ -40,12 +50,10 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
 class Loading(QtWidgets.QWidget):
     def __init__(self, *args):
         super().__init__()
-        uic.loadUi('ui/main.ui', self)
         self.initUI()
 
     def initUI(self):
         self.setFixedSize(800, 600)
-
         self.label_animation = QtWidgets.QLabel(self)
 
         self.movie = QtGui.QMovie('logo/loader.gif')
@@ -53,7 +61,7 @@ class Loading(QtWidgets.QWidget):
 
         timer = QtCore.QTimer(self)
         self.startAnimation()
-        timer.singleShot(5000, self.stopAnimation)
+        timer.singleShot(4900 + random.randrange(200), self.stopAnimation)
 
         self.show()
 
