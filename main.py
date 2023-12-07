@@ -33,7 +33,7 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
     def signal_handler(self, value):
         QtWidgets.QMessageBox.about(self, 'Оповещение', value)
 
-    @reg_check
+    # @reg_check
     def registration(self):
         fio = self.fio.text()
         email = self.email.text()
