@@ -25,8 +25,8 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
             if (self.fio.text() != '') and ('@' in self.email.text()) and (self.pas.text() != ''):
                 pass
             else:
-                check_db.Osh('Не правильно введены данные')
-                check_db.Osh.show()
+                # check_db.Osh('Не правильно введены данные')
+                # check_db.Osh.show()
         return wraper
 
     # Обработчик сигнала
