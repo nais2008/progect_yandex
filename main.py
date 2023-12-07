@@ -1,4 +1,6 @@
 import sys
+
+import check_db
 from check_db import *
 import random
 
@@ -23,7 +25,8 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
             if (self.fio.text() != '') and ('@' in self.email.text()) and (self.pas.text() != ''):
                 pass
             else:
-                pass
+                check_db.Osh('Не правильно введены данные')
+                check_db.Osh.show()
         return wraper
 
     # Обработчик сигнала

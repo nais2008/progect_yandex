@@ -3,7 +3,7 @@ from PyQt5 import uic, QtCore, QtGui, QtWidgets
 
 
 class Osh(QtWidgets.QWidget):
-    def __init__(self):
+    def __init__(self, danget_text: str):
         super().__init__()
         uic.loadUi('ui/osh.ui', self)
         self.initUI()
@@ -23,6 +23,7 @@ def login(email, passw, signal):
         print('Авторизован')
     else:
         signal.emit('Неправильно введет логин или пароль')
+        print('не авторизован')
 
     cur.close()
     con.close()
@@ -38,8 +39,8 @@ def registr(fio, email, passw, signal):
     if value != []:
         signal.emit('Аккаунт с этим email уже используется')
         print('не зареган')
-        osh = Osh()
-        osh.show()
+        # osh = Osh()
+        # osh.show()
     elif value == []:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
         print("Зарегистрирован")
