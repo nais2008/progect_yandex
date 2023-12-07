@@ -22,7 +22,7 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
 
     def reg_check(funct):
         def wraper(self):
-            if (self.fio.text() != '') and ('@' in self.email.text()) and (self.pas.text() != ''):
+            if (self.fio != []) and ('@' in self.email) and (self.pas != ''):
                 pass
             else:
                 check_db.Osh('Не правильно введены данные')
@@ -39,6 +39,7 @@ class App(QtWidgets.QMainWindow, QtWidgets.QWidget):
         email = self.email.text()
         pas = self.pas.text()
         self.check_db.thr_reg(fio, email, pas)
+        print(f'pas: {pas}')
 
     def auth(self):
         email = self.email_2.text()
