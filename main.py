@@ -65,7 +65,7 @@ class Loading(QtWidgets.QWidget):
 
         timer = QtCore.QTimer(self)
         self.startAnimation()
-        timer.singleShot(4900 + random.randrange(200), self.stopAnimation)
+        timer.singleShot(4900 + random.randrange(500), self.stopAnimation)
 
         self.show()
 

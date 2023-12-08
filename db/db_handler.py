@@ -5,10 +5,14 @@ from PyQt5 import uic, QtCore, QtGui, QtWidgets
 class Osh(QtWidgets.QWidget):
     def __init__(self, danget_text: str):
         super().__init__()
+        QtWidgets.QMainWindow.__init__(self)
         uic.loadUi('ui/osh.ui', self)
         self.initUI()
-        self.label.setText(self)
 
+    def initUI(self):
+        self.label.setText(self.danget_text)
+        self.app = App(self)
+        self.pushButton.clicked.connect(self.app)
 
 def login(email, passw, signal):
     con = sqlite3.connect('db/db.sqlite')
@@ -39,8 +43,8 @@ def registr(fio, email, passw, signal):
     if value != []:
         signal.emit('Аккаунт с этим email уже используется')
         print('не зареган')
-        # osh = Osh()
-        # osh.show()
+        osh = Osh('Аккаунт с этим email уже используется')
+        osh.show()
     elif value == []:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
         print("Зарегистрирован")
