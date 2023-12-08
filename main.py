@@ -55,6 +55,7 @@ class Loading(QtWidgets.QWidget):
     def __init__(self, *args):
         super().__init__()
         self.initUI()
+        self.setWindowTitle('Loading...')
 
     def initUI(self):
         self.setFixedSize(800, 600)
@@ -66,7 +67,6 @@ class Loading(QtWidgets.QWidget):
         timer = QtCore.QTimer(self)
         self.startAnimation()
         timer.singleShot(4900 + random.randrange(500), self.stopAnimation)
-
         self.show()
 
     def startAnimation(self):
@@ -75,6 +75,22 @@ class Loading(QtWidgets.QWidget):
     def stopAnimation(self):
         self.movie.stop()
         self.close()
+
+        self.main_window = Main_window()
+        self.main_window.show()
+
+
+class Main_window(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('ui/main.ui', self)
+        self.initUI()
+        self.setWindowTitle('TEST')
+
+    def initUI(self):
+        fname = QtGui.QFileDialog.getOpenFileName(
+            self, 'Выбрать картинку', '',
+            'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
 
 
 if __name__ == '__main__':

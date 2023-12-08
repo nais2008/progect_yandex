@@ -1,5 +1,5 @@
 import sqlite3
-from PyQt5 import uic, QtCore, QtGui, QtWidgets
+from PyQt5 import uic, QtCore, QtGui, QtWidgets, Qt
 
 
 class Osh(QtWidgets.QWidget):
