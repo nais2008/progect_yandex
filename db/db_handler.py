@@ -1,18 +1,20 @@
 import sqlite3
-from PyQt5 import uic, QtCore, QtGui, QtWidgets, Qt
+from PyQt5 import uic, QtCore, QtGui, QtWidgets
 
 
-class Osh(QtWidgets.QWidget):
+class Osh(QtWidgets.QDialog):
     def __init__(self, danget_text: str):
         super().__init__()
-        QtWidgets.QMainWindow.__init__(self)
         uic.loadUi('ui/osh.ui', self)
+
+        self.pushButton.clicked.connect(self.close)
+        self.danget_text = danget_text
+
         self.initUI()
 
     def initUI(self):
         self.label.setText(self.danget_text)
-        self.app = App(self)
-        self.pushButton.clicked.connect(self.app)
+
 
 def login(email, passw, signal):
     con = sqlite3.connect('db/db.sqlite')
@@ -33,21 +35,25 @@ def login(email, passw, signal):
     con.close()
 
 
-def registr(fio, email, passw, signal):
+def registr(_self, fio, email, passw, signal):
     con = sqlite3.connect('db/db.sqlite')
     cur = con.cursor()
 
     cur.execute(f'SELECT * FROM user WHERE email="{email}";')
     value = cur.fetchall()
 
-    if value != []:
-        signal.emit('Аккаунт с этим email уже используется')
-        print('не зареган')
-        osh = Osh('Аккаунт с этим email уже используется')
-        osh.show()
-    elif value == []:
+    if value:
+        _self.osh = Osh('Аккаунт с этим email уже используется')
+        _self.osh.exec()
+
+    else:
         cur.execute(f"INSERT INTO user (fio, email, password) VALUES ('{fio}', '{email}', '{passw}')")
-        print("Зарегистрирован")
+        print(f"Зарегистрирован: {_self.fio.text()}")
+        _self.fio.clear()
+        _self.email.clear()
+        _self.pas.clear()
+        _self.email_2.setFocus()
+
         con.commit()
 
     cur.close()
