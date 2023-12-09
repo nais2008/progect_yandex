@@ -1,6 +1,5 @@
 import sys
 
-from check_db import CheckThread
 from check_db import *
 import random
 
@@ -9,6 +8,37 @@ class AppMain(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         uic.loadUi('ui/main.ui', self)
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('TEST')
+        self.pushButton_2.clicked.connect(self.showDialog)
+
+        self.radioButton_3.clicked.connect(self.showPix1)
+        self.radioButton_2.clicked.connect(self.showPix)
+        self.radioButton.clicked.connect(self.closePix)
+        self.radioButton_4.clicked.connect(self.closePix)
+        self.label.close()
+        self.lineEdit.close()
+
+    def showDialog(self):
+        fname = QtWidgets.QFileDialog.getOpenFileName(
+            self, 'Выбрать картинку', '',
+            'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
+
+    def showPix(self):
+        self.label.show()
+        self.label.setText('Количеств пикселей : ')
+        self.lineEdit.show()
+
+    def showPix1(self):
+        self.label.show()
+        self.label.setText('Изменить на : ')
+        self.lineEdit.show()
+
+    def closePix(self):
+        self.label.close()
+        self.lineEdit.close()
 
 
 class Loading(QtWidgets.QWidget):
@@ -17,6 +47,7 @@ class Loading(QtWidgets.QWidget):
         self.initUI()
 
     def initUI(self):
+        self.setWindowTitle('Загрузка...')
         self.setFixedSize(800, 600)
         self.label_animation = QtWidgets.QLabel(self)
 
