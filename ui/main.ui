@@ -71,6 +71,24 @@ QPushButton:hover{
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QLabel" name="picture">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel{
+padding-top:5px;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

@@ -24,7 +24,11 @@ class AppMain(QtWidgets.QWidget):
     def showDialog(self):
         fname = QtWidgets.QFileDialog.getOpenFileName(
             self, 'Выбрать картинку', '',
-            'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)')[0]
+            'Картинка (*.jpg *.jpeg *.png *.gif)')
+
+        imagePath = fname[0]
+        pixmap = QtGui.QPixmap(imagePath)
+        self.picture.setPixmap(QtGui.QPixmap(pixmap))
 
     def showPix(self):
         self.label.show()
@@ -51,7 +55,7 @@ class Loading(QtWidgets.QWidget):
         self.setFixedSize(800, 600)
         self.label_animation = QtWidgets.QLabel(self)
 
-        self.movie = QtGui.QMovie('logo/loader.gif')
+        self.movie = QtGui.QMovie('img/loader.gif')
         self.label_animation.setMovie(self.movie)
 
         timer = QtCore.QTimer(self)
@@ -124,7 +128,7 @@ class App(QtWidgets.QMainWindow):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    app.setWindowIcon(QtGui.QIcon('logo/logo.png'))
+    app.setWindowIcon(QtGui.QIcon('img/logo.png'))
     ex = App()
     ex.show()
     try:
