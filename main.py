@@ -2,6 +2,7 @@ import sys
 
 from check_db import *
 import random
+from PIL import Image
 
 
 class AppMain(QtWidgets.QWidget):
@@ -20,12 +21,14 @@ class AppMain(QtWidgets.QWidget):
         self.radioButton_4.clicked.connect(self.closePix)
         self.label.close()
         self.lineEdit.close()
+        self.pushButton_3.close()
+        self.pushButton.clicked.connect(self.izmPhoto)
 
     def showDialog(self):
         fname = QtWidgets.QFileDialog.getOpenFileName(
             self, 'Выбрать картинку', '',
             'Картинка (*.jpg *.jpeg *.png *.gif)')
-
+        print(fname)
         imagePath = fname[0]
         pixmap = QtGui.QPixmap(imagePath)
         self.picture.setPixmap(QtGui.QPixmap(pixmap))
@@ -43,6 +46,10 @@ class AppMain(QtWidgets.QWidget):
     def closePix(self):
         self.label.close()
         self.lineEdit.close()
+
+    def izmPhoto(self):
+        # здесь по идее должно быть изменение фото
+        pass
 
 
 class Loading(QtWidgets.QWidget):

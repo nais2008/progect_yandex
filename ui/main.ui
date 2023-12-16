@@ -32,11 +32,11 @@ QPushButton{
 	background:qlineargradient(spread:pad, x1:0, y1:0.574, x2:1, y2:0, stop:0 rgba(13, 0, 99, 255), stop:1 rgba(23, 0, 237, 255));
 	padding:5px;
 	color:#fff;
+	width:100%;
 }
 
 QPushButton:hover{
 	border: 2px solid rgb(0, 170, 255);
-	outline-offset:10px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -86,6 +86,19 @@ padding-top:5px;
         </property>
         <property name="alignment">
          <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="font">
+         <font>
+          <family>Calibri</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сохранить</string>
         </property>
        </widget>
       </item>
