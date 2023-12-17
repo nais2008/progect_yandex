@@ -2,7 +2,7 @@ import sys
 
 from check_db import *
 import random
-from PIL import Image
+# from PIL import Image
 
 
 class AppMain(QtWidgets.QWidget):
