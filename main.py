@@ -2,7 +2,7 @@ import sys
 
 from check_db import *
 import random
-# from PIL import Image
+from PIL import Image
 
 
 class AppMain(QtWidgets.QWidget):
@@ -48,8 +48,11 @@ class AppMain(QtWidgets.QWidget):
         self.lineEdit.close()
 
     def izmPhoto(self):
-        # здесь по идее должно быть изменение фото
-        pass
+        try:
+            if self.radioButton.isChecked():
+                print('filter')
+        except ValueError:
+            pass
 
 
 class Loading(QtWidgets.QWidget):
