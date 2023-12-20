@@ -2,7 +2,7 @@ import sys
 
 from check_db import *
 import random
-from PIL import Image
+from PIL import Image, ImageFilter, ImageEnhance
 
 
 class AppMain(QtWidgets.QWidget):
@@ -10,49 +10,42 @@ class AppMain(QtWidgets.QWidget):
         super().__init__(parent)
         uic.loadUi('ui/main.ui', self)
         self.initUI()
+        self.image_path = None
 
     def initUI(self):
         self.setWindowTitle('TEST')
-        self.pushButton_2.clicked.connect(self.showDialog)
 
-        self.radioButton_3.clicked.connect(self.showPix1)
-        self.radioButton_2.clicked.connect(self.showPix)
-        self.radioButton.clicked.connect(self.closePix)
-        self.radioButton_4.clicked.connect(self.closePix)
-        self.label.close()
-        self.lineEdit.close()
-        self.pushButton_3.close()
-        self.pushButton.clicked.connect(self.izmPhoto)
+        self.btn_load.clicked.connect(self.load_image)
+        self.radio1.clicked.connect(self.apply_filter)
+        self.radio2.clicked.connect(self.apply_filter)
+        self.radio3.clicked.connect(self.apply_filter)
+        self.btn_save.clicked.connect(self.save_image)
 
-    def showDialog(self):
-        fname = QtWidgets.QFileDialog.getOpenFileName(
+    def load_image(self):
+        self.image_path, _ = QtWidgets.QFileDialog.getOpenFileName(
             self, 'Выбрать картинку', '',
-            'Картинка (*.jpg *.jpeg *.png *.gif)')
-        print(fname)
-        imagePath = fname[0]
-        pixmap = QtGui.QPixmap(imagePath)
-        self.picture.setPixmap(QtGui.QPixmap(pixmap))
+            'Картинка (*.jpg);;Картинка (*.png);;Все файлы (*)'
+        )
+        if self.image_path:
+            self.label.setPixmap(QtGui.QPixmap(self.image_path))
 
-    def showPix(self):
-        self.label.show()
-        self.label.setText('Количеств пикселей : ')
-        self.lineEdit.show()
+    def apply_filter(self):
+        if self.image_path:
+            image = Image.open(self.image_path)
+            if self.radio1.isChecked():
+                image = image.convert('L')
+            elif self.radio2.isChecked():
+                image = image.filter(ImageFilter.BLUR)
+            elif self.radio3.isChecked():
+                image = ImageEnhance.Sharpness(image).enhance(2.0)
+            image.save('temp.png')
+            self.label.setPixmap(QtGui.QPixmap('temp.png'))
 
-    def showPix1(self):
-        self.label.show()
-        self.label.setText('Изменить на : ')
-        self.lineEdit.show()
-
-    def closePix(self):
-        self.label.close()
-        self.lineEdit.close()
-
-    def izmPhoto(self):
-        try:
-            if self.radioButton.isChecked():
-                print('filter')
-        except ValueError:
-            pass
+    def save_image(self):
+        if self.image_path:
+            save_path, _ = QtWidgets.QFileDialog.getSaveFileName()
+            if save_path:
+                Image.open('temp.png').save(save_path + '.png')
 
 
 class Loading(QtWidgets.QWidget):

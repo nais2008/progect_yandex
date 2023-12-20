@@ -53,7 +53,7 @@ QPushButton:hover{
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_load">
         <property name="font">
          <font>
           <family>Calibri</family>
@@ -72,7 +72,7 @@ QPushButton:hover{
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="picture">
+       <widget class="QLabel" name="label">
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
@@ -86,19 +86,6 @@ padding-top:5px;
         </property>
         <property name="alignment">
          <set>Qt::AlignBottom|Qt::AlignHCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="font">
-         <font>
-          <family>Calibri</family>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Сохранить</string>
         </property>
        </widget>
       </item>
@@ -123,7 +110,7 @@ padding-top:5px;
          <number>25</number>
         </property>
         <item row="0" column="0">
-         <widget class="QRadioButton" name="radioButton">
+         <widget class="QRadioButton" name="radio1">
           <property name="font">
            <font>
             <family>Calibri</family>
@@ -131,12 +118,25 @@ padding-top:5px;
            </font>
           </property>
           <property name="text">
-           <string>Поменять местами цвета пикселей</string>
+           <string>Оттенки серого</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QRadioButton" name="radio3">
+          <property name="font">
+           <font>
+            <family>Calibri</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Повышение резкости</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QRadioButton" name="radioButton_2">
+         <widget class="QRadioButton" name="radio2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -159,67 +159,20 @@ padding-top:5px;
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Размыть фото</string>
+           <string>Размытие</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QRadioButton" name="radioButton_4">
-          <property name="font">
-           <font>
-            <family>Calibri</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Сделать фото черно-белым</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QRadioButton" name="radioButton_3">
-          <property name="font">
-           <font>
-            <family>Calibri</family>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Изменить цвет пикселей</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label">
-          <property name="font">
-           <font>
-            <family>Calibri</family>
-            <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Количество пикселей :</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1" colspan="3">
-         <widget class="QLineEdit" name="lineEdit"/>
-        </item>
-        <item row="2" column="0" colspan="4">
-         <widget class="QPushButton" name="pushButton">
+        <item row="1" column="0" colspan="3">
+         <widget class="QPushButton" name="btn_save">
           <property name="font">
            <font>
             <family>Calibri</family>
             <pointsize>14</pointsize>
            </font>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
           <property name="text">
-           <string>Создать</string>
+           <string>Сохранить</string>
           </property>
          </widget>
         </item>
