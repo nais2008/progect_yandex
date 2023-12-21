@@ -49,7 +49,7 @@ class AppMain(QtWidgets.QWidget):
 
 
 class Loading(QtWidgets.QWidget):
-    def __init__(self, *args):
+    def __init__(self):
         super().__init__()
         self.initUI()
 
@@ -122,7 +122,7 @@ class App(QtWidgets.QMainWindow):
         self.check_db.thr_login(email, pas)
 
         if self.loading_flag:
-            self.loading = Loading(self)
+            self.loading = Loading()
             self.loading.show()
             self.close()
         else:
